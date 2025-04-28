@@ -8,8 +8,8 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    public function index()
     {
-        return $post->get();
+        return view('posts.index', ['posts' => Post::getByLimit()]);
     }
 }
