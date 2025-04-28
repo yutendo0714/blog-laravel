@@ -12,4 +12,10 @@ class PostController extends Controller
     {
         return view('posts.index', ['posts' => Post::getPaginateByLimit(3)]);
     }
+
+    public function show(int $id)
+    {
+        return view('posts.show', ['post' => Post::find($id)]);
+        // return "hello world";
+    }
 }
