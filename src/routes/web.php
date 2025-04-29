@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\Framework\Attributes\PostCondition;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', [PostController::class, "index"]);
+Route::get('/', [PostController::class, "index"])->name('posts.index');
 
-Route::get('/posts/{id}', [PostController::class, "show"]);
+Route::get('/posts/create', [PostController::class, "create"]);
+
+Route::get('/posts/{id}', [PostController::class, "show"])->name('posts.show');
+
+Route::post('/posts', [PostController::class, "store"]);
