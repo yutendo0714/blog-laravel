@@ -38,4 +38,21 @@ class PostController extends Controller
         $post = $post->createPost($request->all());
         return redirect()->route('posts.show', ['id' => $post->id]);
     }
+
+    public function edit(int $id)
+    {
+        $post = new Post();
+        $post = $post->find($id);
+        return view('posts.edit', ['post' => $post]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $post = new Post();
+        $post = $post->findOrFail($id);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
+        return redirect()->route('posts.show', ['id' => $post->id]);
+    }
 }
