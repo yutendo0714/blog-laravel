@@ -10,6 +10,7 @@
     <h1>投稿の編集</h1>
     <form action="{{ route('posts.show', ['id' => $post->id]) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="title">
             <h2>Title</h2>
             <input type="text" name="title" placeholder="タイトル" value="{{ $post->title }}" />

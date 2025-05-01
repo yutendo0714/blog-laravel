@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = ['title', 'body'];
 
@@ -23,13 +25,20 @@ class Post extends Model
         return self::orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 
-    public static function createPost($data)
+    public function createPost($data)
     {
         // dd($data);
         $post = new Post();
         $post->title = $data['title'];
         $post->body = $data['body'];
         $post->save();
+        return $post;
+    }
+
+    public function deletePost(int $id)
+    {
+        $post = Post::find($id);
+        $post->delete();
         return $post;
     }
 }
