@@ -41,4 +41,9 @@ class Post extends Model
         $post->delete();
         return $post;
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
