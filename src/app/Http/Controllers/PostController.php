@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = new Post();
-        $posts = $posts->getPaginateByLimit(3);
+        $posts = $posts->getPaginateByLimit(5);
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -54,5 +54,13 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->save();
         return redirect()->route('posts.show', ['id' => $post->id]);
+    }
+
+    public function destroy(int $id)
+    {
+        $post = new Post();
+        $result = $post->deletePost($id);
+        // dd($result);
+        return redirect()->route('posts.index');
     }
 }
