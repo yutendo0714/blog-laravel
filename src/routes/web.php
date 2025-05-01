@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\PostCondition;
@@ -32,3 +33,5 @@ Route::put('/posts/{id}', [PostController::class, "update"])->name('posts.update
 Route::delete('/posts/{id}', [PostController::class, "destroy"])->name('posts.destroy');
 
 Route::post('/posts', [PostController::class, "store"])->name('posts.store');
+
+Route::get('categories/{id}', [CategoryController::class, "index"])->name('categories.index');
