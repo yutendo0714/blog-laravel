@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', ['categories' => Category::all()]);
     }
 
     public function store(PostRequest $request)

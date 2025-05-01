@@ -12,7 +12,7 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'category_id'];
 
     public function getByLimit(int $limit_count = 10)
     {
@@ -22,7 +22,7 @@ class Post extends Model
     public function getPaginateByLimit(int $limit_count = 10)
     {
         // updated_atで降順に並べたあと、limitで件数制限をかける
-        return self::orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return self::with('category')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 
     public function createPost($data)
@@ -31,6 +31,7 @@ class Post extends Model
         $post = new Post();
         $post->title = $data['title'];
         $post->body = $data['body'];
+        $post->category_id = $data['category_id'];
         $post->save();
         return $post;
     }
