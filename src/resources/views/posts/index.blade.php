@@ -24,7 +24,7 @@
                 @csrf
                 @method('DELETE')
                 <!-- <button type="button">delete</button> -->
-                <button type="submit" class="btn btn-danger btn-sm">delete</button>
+                <button type="submit" onclick="deletePostConfirm()" class="btn btn-danger btn-sm">delete</button>
             </form>
         </div>
         @endforeach
@@ -32,15 +32,15 @@
     <div class='paginate'>
         {{ $posts->links() }}
     </div>
-    <!-- <script>
-        function deletePostC(id) {
-            'use strict'
+    <script>
+        function deletePostConfirm() {
+            // 'use strict'
 
             if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
                 document.getElementById(`form_${id}`).submit();
             }
         }
-    </script> -->
+    </script>
 </body>
 
 </html>
